@@ -81,7 +81,7 @@ css_files = [
     ("Spacelab", ["spacelab.min.css"]),
     ("Superhero", ["superhero.min.css"]),
     ("Geocities", ["geocities.min.css"]),
-    ("386", ["386.min.css"]),
+    ("386", ["386.css", "386.js", "386.responsive.css"]),
     ("cyberpunk", ["cyberpunk.min.css"]),
 ]
 for css in css_files:
