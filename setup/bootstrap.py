@@ -29,7 +29,7 @@ from builtins import input, str
 
 from tornado.options import options
 
-from libs.ConsoleColors import *
+from libs.ConsoleColors import WARN, PROMPT
 from models import dbsession
 from models.GameLevel import GameLevel
 from models.MarketItem import MarketItem
@@ -82,7 +82,7 @@ css_files = [
     ("Superhero", ["superhero.min.css"]),
     ("Geocities", ["geocities.min.css"]),
     ("386", ["386.css", "386.js", "386.responsive.css"]),
-    ("cyberpunk", ["cyberpunk.min.css"]),
+    ("Cyberpunk", ["cyberpunk.min.css"]),
 ]
 for css in css_files:
     theme = Theme(name=css[0])
