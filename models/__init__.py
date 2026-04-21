@@ -101,13 +101,15 @@ if options.rocketchat_admin:
 
 @contextmanager
 def cxt_dbsession():
-    """Provide a transactional scope around a series of operations."""
     session = StartSession()
     try:
         yield session
         session.commit()
-    except:
-        session.rollback()
+    except Exception:
+        try:
+            session.rollback()
+        except Exception:
+            pass
         raise
     finally:
         session.close()

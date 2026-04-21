@@ -21,15 +21,11 @@ Created on Mar 12, 2012
 
 import logging
 
-try:
-    from urllib.parse import urlparse
-except ImportError:
-    from urlparse import urlparse
-from builtins import str
+from urllib.parse import urlparse
 
 from sqlalchemy import Column, ForeignKey, desc
 from sqlalchemy.sql import and_
-from sqlalchemy.types import Boolean, Integer, String, Unicode
+from sqlalchemy.types import Boolean, Integer, Unicode
 from tornado.options import options
 
 from models import dbsession
@@ -63,7 +59,7 @@ class Notification(DatabaseObject):
         """Returns a list of unique notifications in the database"""
         return dbsession.query(
             cls.created, cls.icon_url, cls.message, cls.title
-        ).distinct()
+        ).distinct().all()
 
     @classmethod
     def clear(cls):
