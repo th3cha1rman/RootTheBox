@@ -31,5 +31,5 @@ def create_tables(sqla_engine, sqla_metadata, echo=False):
 metadata = DatabaseObject.metadata
 
 # Create secondary tables
-# Import your models here
+# Import relationships after all models are loaded
 from models.Relationships import * # noqa: F403 E402
