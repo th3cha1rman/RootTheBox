@@ -2,10 +2,17 @@ services:
   webapp:
     hostname: 'rtbdev'
     build:
-      context: .
+      context: ..
       dockerfile: .devcontainer/Dockerfile
+    ports:
+      - "8888:8888"
     volumes:
-      - .:/home/rtbdev/code/:cached
+      - ..:/home/rtbdev/code/:cached
+      - ~/.gitconfig:/home/rtbdev/.gitconfig:ro  # optional: git config
+    environment:
+      - SQL_DIALECT=mysql
+      - PYTHONUNBUFFERED=1
+      - DEBUG=true
     command: /bin/sh -c "while sleep 1000; do :; done"
     depends_on:
       mysql:
@@ -20,7 +27,6 @@ services:
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_general_ci
       --skip-name-resolve=OFF
-      --default-authentication-plugin=mysql_native_password
     ports:
       - "3306:3306"
     healthcheck:
@@ -33,3 +39,13 @@ services:
       - MYSQL_DATABASE=rootthebox
       - MYSQL_USER=rtb
       - MYSQL_PASSWORD=rootthebox
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  memcached:
+    image: memcached:latest
+    ports:
+      - "11211:11211"
+
+volumes:
+  mysql-data:
